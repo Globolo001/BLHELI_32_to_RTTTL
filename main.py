@@ -2,8 +2,8 @@
 
 ##This program takes a BLHELI_32 music string and converts it to RTTTL for Blue Jay ESC
 
-# To execute this program, install python3 and run the following command:
-# "python3 /PATH_TO/main.py" ((Probably similar to: "pyhton3 ~/Desktop/main.py" or "pyhton3 %UserProfile%\Desktop\main.py"))
+# To execute this program, install python3 and run the following command: (or execute python online or another way)
+# "python3 /PATH_TO/main.py" ((Probably similar to: (MAC) "pyhton3 ~/Desktop/main.py" or (WINDOWS) "pyhton3 %UserProfile%\Desktop\main.py"))
 # You will be greeted with a commandline menu to convert your BLHELI_32 music string to RTTTL.
 
 #### Just some code #########################################################################################################################
@@ -56,7 +56,7 @@ def convert_split_to_rttl(notes):
 
 def convert_unformatted_string_to_rttl(prefix,source_Melody):
     #get the melody into the right format and convert it to rttl
-    return convert_formatted_string_to_rttl(get_into_right_format(prefix, source_Melody))
+    return convert_formatted_string_to_rttl(prefix, get_into_right_format(source_Melody))
     
      
 
