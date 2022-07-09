@@ -1,14 +1,16 @@
 #Alpha
 
-#This program takes a BLHELI_32 music string and converts it to rttl for Blue Jay
-#to execute this program, run the following command:
-#python3 /PATH_TO/main.py
+##This program takes a BLHELI_32 music string and converts it to RTTTL for Blue Jay ESC
+
+# To execute this program, install python3 and run the following command:
+# "python3 /PATH_TO/main.py" ((Probably similar to: "pyhton3 ~/Desktop/main.py" or "pyhton3 %UserProfile%\Desktop\main.py"))
+# You will be greeted with a commandline menu to convert your BLHELI_32 music string to RTTTL.
+
+#### Just some code #########################################################################################################################
 
 #split each note into note and duration
-def split_into_note_and_duration(input,previous_note):
-    
+def split_into_note_and_duration(input):
     #if it contains #, it is a sharp note. get the position of the #
-    
     if "#" in input:
         #get the position of the #
         position = input.index("#")
@@ -36,7 +38,7 @@ def split_all_notes(source_Melody):
     for note in input:
         #add the note to the list
         #use the last note as the previous note. if notes is empty, use empty string
-        notes.append(split_into_note_and_duration(note, "" if len(notes) == 0 else notes[-1][0]))
+        notes.append(split_into_note_and_duration(note))
     return notes
 
 def convert_split_to_rttl(notes):
@@ -52,7 +54,13 @@ def convert_split_to_rttl(notes):
     rttl_notes = rttl_notes[:-1]
     return rttl_notes
 
-def convert_string_to_rttl(prefix,source_Melody):
+def convert_unformatted_string_to_rttl(prefix,source_Melody):
+    #get the melody into the right format and convert it to rttl
+    return convert_formatted_string_to_rttl(get_into_right_format(prefix, source_Melody))
+    
+     
+
+def convert_formatted_string_to_rttl(prefix,source_Melody):
     notes = split_all_notes(source_Melody)
     result = prefix + ":" + convert_split_to_rttl(notes)
     return result
@@ -99,13 +107,13 @@ esc4 = get_into_right_format(esc4)
 prefix = "coffin:b=250,o=3,d=4"
 
 #print("ESC1")
-convert_string_to_rttl(insert_number(prefix,1), esc1)
+convert_unformatted_string_to_rttl(insert_number(prefix,1), esc1)
 #print("ESC2")
-convert_string_to_rttl(insert_number(prefix,2),esc2)
+convert_unformatted_string_to_rttl(insert_number(prefix,2),esc2)
 #print("ESC3")
-convert_string_to_rttl(insert_number(prefix,3),esc3)
+convert_unformatted_string_to_rttl(insert_number(prefix,3),esc3)
 #print("ESC4")
-convert_string_to_rttl(insert_number(prefix,4),esc4)
+convert_unformatted_string_to_rttl(insert_number(prefix,4),esc4)
 
 
 ################################# COMMANDLINE UI ##############################################
@@ -136,8 +144,8 @@ while True:
         #type exit to exit
         if input_melody == "exit":
             break
-        
-        melodies.append(convert_string_to_rttl(insert_number(prefix,i+1),get_into_right_format(input_melody)))
+        #convert the input to rttl
+        melodies.append(convert_unformatted_string_to_rttl(insert_number(prefix,i+1),input_melody))
         print("\nESC{}:\n{}\n".format(i+1, melodies[i]))
     
     #print all the melodies
