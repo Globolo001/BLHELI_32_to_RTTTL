@@ -11,7 +11,7 @@ Once the script starts a commandline interface opens which I hope it is self-exp
 I am happy to receive feedback.
 
 ## Input:
-I hope I got all syntax of BLHELI_32 music covered (if not, contact me on BlueJay Discord). Just copy-paste it into the prompt when asked.
+I hope I got all syntax of BLHELI_32 music covered (if not, contact me on BlueJay Discord). Just copy-paste your music (without "quotations") into the prompt when asked.
 Melody fomatting is: "**A#5 8 P8 A#5 8**" OR "**A#58 P8 A#58**" OR mixed.
 With the default 2 parameters, those inputs will lead to
 "test1:b=210,o=3,d=4:**8a#5,8p,8a#5**"
