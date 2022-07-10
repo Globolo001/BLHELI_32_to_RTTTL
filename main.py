@@ -62,7 +62,7 @@ def convert_unformatted_string_to_rttl(prefix,source_Melody):
 def insert_number(string, number):
     return string[:string.index(":")] + str(number) + string[string.index(":"):]
 
-#For BLHELI_32 notation, with spaces between notes and duration ("A#5 8 P8 A#5 8"), apply this function to get formatted ("A#58 P8 A#5 8")
+#For BLHELI_32 notation, with spaces between notes and duration ("A#5 8 P8 A#5 8"), apply this function to get formatted ("A#58 P8 A#58")
 def get_into_right_format(string):
     working_string = string.split(" ")
     #go through each note. if it has only one character, append to the previous note
