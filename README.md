@@ -18,6 +18,6 @@ With the default 2 parameters, those inputs will lead to
 
 #### Note
 
-I know this isn't the pretties code. Feel free to improve ;)
+I know this isn't the prettiest code. Feel free to improve ;)
 
 ### Have fun using your BLHELI_32 songs again :)
