@@ -56,7 +56,6 @@ def convert_formatted_string_to_rttl(prefix,source_Melody):
 
 #do the full conversion from unformatted string to rttl
 def convert_unformatted_string_to_rttl(prefix,source_Melody):
-    #get the melody into the right format and convert it to rttl
     return convert_formatted_string_to_rttl(prefix, get_into_right_format(source_Melody))
 
 #insert number before colon in string for the prefix in rtttl
