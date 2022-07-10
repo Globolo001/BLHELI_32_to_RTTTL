@@ -5,7 +5,9 @@
 If you don't know how to execute a python script I would reccomend using an online-tool to execute the simple script.
 Just google "Python Interpreter Online" (like https://www.programiz.com/python-programming/online-compiler/)
 
-Once the script starts (with the start/run button) a commandline interface opens which I hope it is self-explainatory.
+Copy the contents of the file **main.py** into the editor and press run (or similar).
+
+Once the script starts a commandline interface opens which I hope it is self-explainatory.
 I am happy to receive feedback.
 
 ## Input:
