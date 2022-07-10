@@ -13,3 +13,5 @@ I hope I got all syntax of BLHELI_32 music covered (if not, contact me on BlueJa
 Melody fomatting is: "**A#5 8 P8 A#5 8**" OR "**A#58 P8 A#58**" OR mixed.
 With the default 2 parameters, those inputs will lead to
 "test1:b=210,o=3,d=4:**8a#5,8p,8a#5**"
+
+# Have fun using your BLHELI_32 songs again :)
