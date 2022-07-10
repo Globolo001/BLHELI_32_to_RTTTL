@@ -101,7 +101,7 @@ while True:
         if input_melody == "exit":
             break
         #convert the input to rttl and save to list
-        melodies.append(convert_unformatted_string_to_rttl(insert_number(prefix,i+1),input_melody))
+        melodies.append(convert_unformatted_string_to_rttl(insert_number(header,i+1),input_melody))
         print("\nESC{}:\n{}\n".format(i+1, melodies[i]))
     
     #print all the melodies
