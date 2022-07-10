@@ -16,8 +16,8 @@ Melody fomatting is: "**A#5 8 P8 A#5 8**" OR "**A#58 P8 A#58**" OR mixed.
 With the default 2 parameters, those inputs will lead to
 "test1:b=210,o=3,d=4:**8a#5,8p,8a#5**"
 
-####Note
+#### Note
 
-I know this isn't the pretties code. Feel free to improve :)
+I know this isn't the pretties code. Feel free to improve ;)
 
 ### Have fun using your BLHELI_32 songs again :)
