@@ -115,7 +115,7 @@ def insert_number(string, number):
 
 
 ################################# COMMANDLINE UI ##############################################
-print("\n\n##### WELCOME TO THE BLHELI_32 to BLUE JAY MUSIC CONVERTER #####\n\n")
+print("\n\n##### WELCOME TO THE BLHELI_32 to BlueJay MUSIC CONVERTER #####\n\n")
 
 name_prompt = "Enter your melody name (default/blank is \"test\"):"
 speed_prompt = "Enter your speed (default/blank is 210): "
