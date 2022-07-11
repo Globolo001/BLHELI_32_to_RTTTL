@@ -103,15 +103,15 @@ def insert_number(string, number):
 
 ################################# Testing Ground ##############################################
 
-song1 = "D5 8 E5 8 G5 8 D5 8 B5 4 P8 B5 4 P8 A5 2 P4 D5 8 E5 8 G5 8 D5 8 A5 4 P8 A5 4 P8 G5 4 G5 8 F#5 8 E5 4 D5 8 E5 8 G5 8 E5 8 G5 2 A5 4 F#5 4 F#5 8 E5 8 D5 4 D5 8 P 8 D5 8 P8 A5 4 A5 8 P8 G5 2"
-song2 = "C64 A#54 A54 F54 G52 G54 D64 C62 A#52 A52 A54 A54 C62 A#54 A54 G52 G54 A#64 A64 A#64 A64 A#64 G52 G54 A#64 A64 A#64 A64 A#64"
-song3 = "E6 1/4  D6 1/4  F#5 1/2  G#5 1/2    C#6 1/4    B5 1/4    D5 1/2     E5 1/2  B5 1/4  A5 1/4  C#5 1/2 E5 1/2 A5 1/1"
-song4_broken = "D5 8 E5 8 G3 2 F#5 1/ J#6 1/4 B5 14"
+# song1 = "D5 8 E5 8 G5 8 D5 8 B5 4 P8 B5 4 P8 A5 2 P4 D5 8 E5 8 G5 8 D5 8 A5 4 P8 A5 4 P8 G5 4 G5 8 F#5 8 E5 4 D5 8 E5 8 G5 8 E5 8 G5 2 A5 4 F#5 4 F#5 8 E5 8 D5 4 D5 8 P 8 D5 8 P8 A5 4 A5 8 P8 G5 2"
+# song2 = "C64 A#54 A54 F54 G52 G54 D64 C62 A#52 A52 A54 A54 C62 A#54 A54 G52 G54 A#64 A64 A#64 A64 A#64 G52 G54 A#64 A64 A#64 A64 A#64"
+# song3 = "E6 1/4  D6 1/4  F#5 1/2  G#5 1/2    C#6 1/4    B5 1/4    D5 1/2     E5 1/2  B5 1/4  A5 1/4  C#5 1/2 E5 1/2 A5 1/1"
+# song4_broken = "D5 8 E5 8 G3 2 F#5 1/ J#6 1/4 B5 14"
 
-print (convert_unformatted_string_to_rttl("testing1", song1))
-print (convert_unformatted_string_to_rttl("testing2", song2))
-print (convert_unformatted_string_to_rttl("testing3", song3))
-print (convert_unformatted_string_to_rttl("testing4", song4_broken))
+# print (convert_unformatted_string_to_rttl("testing1", song1))
+# print (convert_unformatted_string_to_rttl("testing2", song2))
+# print (convert_unformatted_string_to_rttl("testing3", song3))
+# print (convert_unformatted_string_to_rttl("testing4", song4_broken))
 
 
 ################################# COMMANDLINE UI ##############################################
