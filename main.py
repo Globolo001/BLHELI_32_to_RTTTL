@@ -123,7 +123,7 @@ print("\n\n##### WELCOME TO THE BLHELI_32 to BLUE JAY MUSIC CONVERTER #####\n\n"
 
 name_prompt = "Enter your melody name (default/blank is \"test\"):"
 speed_prompt = "Enter your speed (default/blank is 210): "
-output_melody_formatting = "Melody fomatting is: \n\"A#58 P8 G516\" OR\n\"A#5 8 P4 G5 16\" OR\n\"A#5 1/8 P 1/8 G5 1/16\" OR mixed"
+output_melody_formatting = "Melody fomatting is: \n\"A#58 P8 G516\" OR\n\"A#5 8 P4 G5 16\" OR\n\"A#5 1/8 P 1/8 G5 1/16\" OR mixed\nAdditional Spaces are removed"
 input_prompt = "Enter your melody for ESC{}: (type \"exit\" to exit)"
 
 while True:
