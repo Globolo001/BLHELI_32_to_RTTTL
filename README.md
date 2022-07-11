@@ -1,5 +1,5 @@
 # BLHELI_32_to_RTTTL
-## This program takes a BLHELI_32 music string and converts it to RTTTL for BlueJay ESC firmware
+### This program takes a BLHELI_32 music string and converts it to RTTTL for BlueJay ESC firmware
 
 ## Execution:
 If you don't know how to execute a python script I reccomend using an online-tool to execute the simple script.
@@ -12,7 +12,7 @@ I am happy to receive feedback.
 
 ## Input:
 I hope I got all syntax of BLHELI_32 music covered (if not, contact me on BlueJay Discord). Just copy-paste your music (without "quotations") into the prompt when asked.
-The formatting is explained in the UI
+The formatting is explained in the UI.
 
 ## Useful Links:
 BlueJay Github: https://github.com/mathiasvr/bluejay
