@@ -12,7 +12,7 @@ import re
 
 accepted_notation_regex = '^[CDEFGABP]#?\d{0,4}$|^\d[\/]\d{1,2}$|^\d$'
 
-#For BLHELI_32 notation, with spaces between notes and duration ("A#5 8 P8 A#5 8"), apply this function to get formatted ("A#58 P8 A#58")
+#For BLHELI_32 notation with wrong formatting. It converts to 'G#34'  wihout spaces between duration and tune (like 'G#3 4' or 'G#3 1/4)'
 def get_into_right_format(string):
     working_string = string.split(" ")
 
@@ -21,7 +21,6 @@ def get_into_right_format(string):
     working_string = [x for x in working_string if x != "\t"]
     working_string = [x for x in working_string if x != "\n"]
 
-    #remove quotation marks
     working_string = [x.replace("\"","") for x in working_string]
 
     #go through each note
@@ -38,7 +37,6 @@ def get_into_right_format(string):
                 working_string.pop(i)
         elif "/" in working_string[i] and len(working_string[i]) >= 3 and working_string[i][2].isdigit():
             #if it is a duration in the form of "1/x", append to the previous note
-            #print("Test: " + working_string[i])
             beat = working_string[i].split("/")
             working_string[i-1] += beat[1]
             working_string.pop(i)
@@ -117,8 +115,6 @@ print (convert_unformatted_string_to_rttl("testing4", song4_broken))
 
 
 ################################# COMMANDLINE UI ##############################################
-#make a command-line interface
-#get the input
 print("\n\n##### WELCOME TO THE BLHELI_32 to BLUE JAY MUSIC CONVERTER #####\n\n")
 
 name_prompt = "Enter your melody name (default/blank is \"test\"):"
@@ -132,7 +128,6 @@ while True:
         name = "test"
     #enter speed or leave blank for default
     speed = input(speed_prompt)
-    #if speed is not a number an integer, set it to 210
     if speed == "" or not speed.isdigit():
         speed = 210
     else:
@@ -145,16 +140,13 @@ while True:
         input_melody = input(input_prompt.format(i+1))
         if input_melody == "exit":
             break
-        #convert the input to rttl and save to list
         melodies.append(convert_unformatted_string_to_rttl(insert_number(header,i+1),input_melody))
         print("\nESC{}:\n{}\n".format(i+1, melodies[i]))
     
-    #print all the melodies
     print("\n\n##### ALL MELODIES #####\n")
     for melody in melodies:
         print(melody)
 
-    #ask if user wants to continue
     cont = input("\nDo you want to continue? (y/n)")
     if cont == "n":
         break
