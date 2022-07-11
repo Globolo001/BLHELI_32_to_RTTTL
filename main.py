@@ -1,6 +1,6 @@
 ### Alpha
 
-### This program takes a BLHELI_32 music string and converts it to RTTTL for Blue Jay ESC ###
+### This program takes a BLHELI_32 music string and converts it to RTTTL for BlueJay ESC ###
 
 # To execute this program, run python online or another way. You can install python3 and run the following command: 
 # "python3 /PATH_TO/main.py" ((Probably similar to: (MAC) "pyhton3 ~/Desktop/main.py" or (WINDOWS) "pyhton3 %UserProfile%\Desktop\main.py"))
