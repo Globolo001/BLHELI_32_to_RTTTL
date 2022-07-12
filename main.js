@@ -206,8 +206,8 @@ console.log(convert_blheli32_to_rttl_prefixbuilder_return_invalid_symbols(song1,
 console.log(convert_blheli32_to_rttl_prefixbuilder_return_invalid_symbols(song2, 'teeest2', 260)[0]);
 console.log(convert_blheli32_to_rttl_prefixbuilder_return_invalid_symbols(song3)[0]);
 console.log(convert_blheli32_to_rttl_prefixbuilder_return_invalid_symbols(song4, 'teeeeeeest4', 420,'A')[0]);
-console.log(convert_blheli32_to_rttl_prefixbuilder_return_invalid_symbols(song5_broken, 'teeeeest5', 210,8,'C')[0]); */
-
+console.log(convert_blheli32_to_rttl_prefixbuilder_return_invalid_symbols(song5_broken, 'teeeeest5', 210,8,'C')[0]);
+ */
 
 // ############################# COMMANDLINE UI #############################
 
