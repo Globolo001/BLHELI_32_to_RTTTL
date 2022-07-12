@@ -3,13 +3,17 @@
 /** 
  * This program takes a BLHELI_32 music string and converts it to RTTTL for BlueJay ESC.
  * 
- * API: Call 'convert_unformatted_string_to_rttl_with_invalid_symbols' with a prefix and an unformatted BL_HELI_32 string;
+ * API: Call 'convert_unformatted_string_to_rttl_with_prefixbuilder_return_invalid_symbols' with the optional parameter and an unformatted BL_HELI_32 string;
  * It returns the rtttl string and the invalid-symbols-strings-array (eg [32DJ, 1/]) as an array;
+ * 
+ * For using a custom prefix (not reccommended):
+ * Call 'convert_unformatted_string_to_rttl_return_invalid_symbols' with the unformatted BL_HELI_32 string;
  * 'convert_unformatted_string_to_rttl' only returns the rtttl string without the invalid-symbols-strings;
  * 
  * Prefix systax: '${name}:d=8,o=5,b=${speed_int}'; (No colon ':').
  * To not use a prefix, call 'convert_unformatted_string_to_rttl_stock_prefix' with an unformatted BL_HELI_32 string and no prefix;
  */
+
 
 // Change if you want a commandline interface (using JavaScript's prompt() function as input)
 const command_line_ui_active = false;
@@ -120,7 +124,6 @@ function split_all_notes(source_Melody) {
         }
     });
     return notes;
-
 }
 
 /**
@@ -136,12 +139,12 @@ function compile_notes_to_rtttl(notes) {
 }
 
 /**
- * Converts a unformatted BLHELI_32 string to rtttl string; Returns the rtttl string and the invalid symbols.
+ * Converts an unformatted BLHELI_32 string to rtttl string; Returns the rtttl string and the invalid symbols.
  * @param {String} prefix Prefix for the rtttl string without colon ':'
  * @param {String} unformatted_source_Melody Unformatted string of a melody in any BLHELI_32 notation
  * @returns {Array<String,Array<String>} Compiled rtttl string and an array of invalid symbols;
  */
-function convert_unformatted_string_to_rttl_with_invalid_symbols(prefix, unformatted_source_Melody) {
+function convert_unformatted_string_to_rttl_return_invalid_symbols(prefix, unformatted_source_Melody) {
     right_format_with_warnings = get_into_right_format(unformatted_source_Melody);
     formatted_string = right_format_with_warnings[0];
     invalid_symbols = right_format_with_warnings[1];
@@ -150,22 +153,51 @@ function convert_unformatted_string_to_rttl_with_invalid_symbols(prefix, unforma
 }
 
 /**
- * Converts a unformatted BLHELI_32 string to rtttl string; Returns the rtttl string.
+ *  * Converts an unformatted BLHELI_32 string to rtttl string with single prefix_parameters given; 
+ * @param {String} unformatted_source_Melody Unformatted string of a melody in any BLHELI_32 notation
+ * @param {String} song_name Name of the song for the header. Leave empty for default "test".
+ * @param {String} length Beat for the song. Leave empty for default "210".
+ * @param {String} duration Duration for the song. Leave empty for default "4".
+ * @param {String} octave Octave for the song. Leave empty for default "5".
+ * @returns {Array<String,Array<String>} Compiled rtttl string and an array of invalid symbols;
+ */
+function convert_blheli32_to_rttl_prefixbuilder_return_invalid_symbols(unformatted_source_Melody, song_name = 'test',length = 210, duration = 8, octave = 5)  {
+    song_name = song_name.length > 0 ? song_name : 'test';
+    length = isNaN(length) ? 210 : length;
+    
+    // Is not a number or not a power of 2
+    if (isNaN(duration)) {
+        duration = 8;
+    }else {
+        // Check if it is a power of 2
+        n = parseInt(duration);
+        duration = (n && (n & (n - 1)) === 0) ? duration : 8;
+    }
+    octave = isNaN(octave) ? 5 : octave;
+
+    prefix = `${song_name}:b=${length},o=${octave},d=${duration}`;
+    return convert_unformatted_string_to_rttl_return_invalid_symbols(prefix, unformatted_source_Melody);
+}
+
+
+
+/**
+ * Converts an unformatted BLHELI_32 string to rtttl string; Returns the rtttl string.
  * @param {String} prefix Prefix for the rtttl string without colon ':'
  * @param {String} unformatted_source_Melody Unformatted string of a melody in any BLHELI_32 notation
  * @returns {String} Compiled rtttl string;
  */
 function convert_unformatted_string_to_rttl(prefix, unformatted_source_Melody) {
-    return convert_unformatted_string_to_rttl_with_invalid_symbols(prefix, unformatted_source_Melody)[0];
+    return convert_unformatted_string_to_rttl_return_invalid_symbols(prefix, unformatted_source_Melody)[0];
 }
 
 /**
- * Converts a unformatted BLHELI_32 string with the stock prefix to rtttl string;
- * @param {String} nformatted_source_Melody Unformatted string of a melody in any BLHELI_32 notation
+ * Converts an unformatted BLHELI_32 string with the stock prefix to rtttl string;
+ * @param {String} unformatted_source_Melody Unformatted string of a melody in any BLHELI_32 notation
  * @returns {String} Compiled rtttl string;
  */
 function convert_unformatted_string_to_rttl_stock_prefix(unformatted_source_Melody) {
-    convert_unformatted_string_to_rttl_with_invalid_symbols(stock_rtttl_prefix, unformatted_source_Melody);
+    convert_unformatted_string_to_rttl_return_invalid_symbols(stock_rtttl_prefix, unformatted_source_Melody);
 }
 
 /**
@@ -179,6 +211,9 @@ function insert_number(prefix, number_to_insert) {
 }
 
 
+// ############################# Node.js #############################
+
+module.export.convert_blheli32_to_rttl_prefixbuilder_return_invalid_symbols = convert_blheli32_to_rttl_prefixbuilder_return_invalid_symbols;
 
 // ############################# Testing Ground #############################
 
@@ -188,11 +223,11 @@ song3 = "E6 1/4  D6 1/4  F#5 1/2  G#5 1/2    C#6 1/4    B5 1/4    D5 1/2     E5 
 song4 = "E64 D64 F#52 G#52 C#64 B54 D52 E52 B54 A54 C#52 E52 A51"
 song5_broken = "D5 8 E5 8 G3 2 F#5 1/ J#6 1/4 B5 14 "
 
-console.log(convert_unformatted_string_to_rttl("testing1", song1))
-console.log(convert_unformatted_string_to_rttl("testing2", song2))
-console.log(convert_unformatted_string_to_rttl("testing3", song3))
-console.log(convert_unformatted_string_to_rttl("testing4", song4))
-console.log(convert_unformatted_string_to_rttl("testing5", song5_broken)) */
+console.log(convert_blheli32_to_rttl_prefixbuilder_return_invalid_symbols(song1, 'teest1', 280, 6, 2)[0]);
+console.log(convert_blheli32_to_rttl_prefixbuilder_return_invalid_symbols(song2, 'teeest2', 260)[0]);
+console.log(convert_blheli32_to_rttl_prefixbuilder_return_invalid_symbols(song3)[0]);
+console.log(convert_blheli32_to_rttl_prefixbuilder_return_invalid_symbols(song4, 'teeeeeeest4', 420,'A')[0]);
+console.log(convert_blheli32_to_rttl_prefixbuilder_return_invalid_symbols(song5_broken, 'teeeeest5', 210,8,'C')[0]); */
 
 
 // ############################# COMMANDLINE UI #############################
@@ -229,7 +264,7 @@ if (command_line_ui_active) {
             if (input_melody == 'exit' || input_melody == null) {
                 break;
             }
-            melody_and_warning = convert_unformatted_string_to_rttl_with_invalid_symbols(insert_number(header, i + 1), input_melody);
+            melody_and_warning = convert_unformatted_string_to_rttl_return_invalid_symbols(insert_number(header, i + 1), input_melody);
             melodies.push(melody_and_warning[0]);
             console.log(`Invalid symbols: ${melody_and_warning[1].join(', ')}`);
             console.log(`\nESC${i + 1}: ${melodies[i]}\n`);
