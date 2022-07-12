@@ -7,7 +7,7 @@
 
 #### Input
 Call the function:\
- `convert_blheli32_to_rtttl_prefixbuilder_return_invalid_symbols(BLHELI_32_string, song_name?,speed?, duration?, octave?)`
+ `convertBlheli32ToRtttlPrefixbuilderInvalidSymbolReturn(BLHELI_32_string, song_name?,speed?, duration?, octave?)`
  
  `?`: Optional parameter. The default are `song_name = 'test',speed = 210, duration = 8, octave = 5`.\
 Parameter-numbers can be string or int. In case it does not match critera, they will be set to default.
