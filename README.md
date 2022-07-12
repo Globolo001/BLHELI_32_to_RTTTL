@@ -43,8 +43,9 @@ I hope I got all syntax of BLHELI_32 music covered (if not, contact me on BlueJa
 The formatting is explained in the UI.
 
 ## Useful Links:
-BlueJay Github: https://github.com/mathiasvr/bluejay
-ESC-Flasher for BlueJay and music: https://esc-configurator.com
+BlueJay Github: https://github.com/mathiasvr/bluejay\
+ESC-Flasher for BlueJay and music: https://esc-configurator.com\
+NPM JS: https://www.npmjs.com/package/blheli_32_to_rtttl 
 
 #### Note
 
