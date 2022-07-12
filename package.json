@@ -1,0 +1,25 @@
+{
+  "name": "blheli_32_to_rtttl",
+  "version": "1.0.0",
+  "description": "This script takes a BLHELI_32 music string and converts it to RTTTL for BlueJay ESC firmware",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Globolo001/BLHELI_32_to_RTTTL.git"
+  },
+  "keywords": [
+    "esc",
+    "blheli_32",
+    "blheli_s",
+    "rtttl"
+  ],
+  "author": "Globolo",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/Globolo001/BLHELI_32_to_RTTTL/issues"
+  },
+  "homepage": "https://github.com/Globolo001/BLHELI_32_to_RTTTL#readme"
+}
