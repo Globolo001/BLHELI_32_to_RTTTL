@@ -6,8 +6,8 @@
 ### Usage
 
 #### Input
-Call the function:\
- `convertBlheli32ToRtttlPrefixbuilderInvalidSymbolReturn(BLHELI_32_string, song_name?,speed?, duration?, octave?)`
+Call the function:
+ `convertBlheli32ToRtttl(BLHELI_32_string, song_name?,speed?, duration?, octave?)`
  
  `?`: Optional parameter. The default are `song_name = 'test',speed = 210, duration = 8, octave = 5`.\
 Parameter-numbers can be string or int. In case it does not match critera, they will be set to default.
@@ -22,7 +22,7 @@ Example:\
 The final RTTTL string can be accessed easily: `function_result[0]`
 
 #### Details
-It does the filtering for unknown symbols with a regex and should always produce an RTTTL readable output without the unwanted symbols.
+It for unknown symbols (in BLHELI_32 notation) with a regex and should always produce an RTTTL readable output without the unwanted symbols.
 
 It might be useful to display the invalid symbols from `result[1]` for the user to improve the users BLHELI_32 string and (maybe) adjust the regex if a new syntax is found.
 It removes all spaces, quotation-marks and new lines.

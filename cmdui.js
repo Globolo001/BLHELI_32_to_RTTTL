@@ -1,11 +1,27 @@
-import * as main from 'main.js';
+import convertBlheli32ToRtttl from "./main.js";
 
 
 // ############################# COMMANDLINE UI #############################
 
-song_name_prompt = 'Enter your melody name (default/blank is \"test\"):';
-speed_prompt = 'Enter your speed (default/blank is 210): ';
-output_melody_formatting = 'Melody fomatting is: \n\"A#58 P8 G516\" OR\n\"A#5 8 P4 G5 16\" OR\n\"A#5 1/8 P 1/8 G5 1/16\" OR mixed\nAdditional Spaces are removed';
+const song_name_prompt = 'Enter your melody name (default/blank is \"test\"):';
+const speed_prompt = 'Enter your speed (default/blank is 210): ';
+const output_melody_formatting = 'Melody fomatting is: \n\"A#58 P8 G516\" OR\n\"A#5 8 P4 G5 16\" OR\n\"A#5 1/8 P 1/8 G5 1/16\" OR mixed\nAdditional Spaces are removed';
+
+
+var promptAlreadyDeclined = false;
+function prompt(question) {
+    // try catch prompt
+    try {
+        return prompt(question);
+    } catch (error) {
+        if (!promptAlreadyDeclined) {
+            console.log('No input available. Please run this script with prompt(); available.');
+            promptAlreadyDeclined = true;
+        }
+        console.log(`No input: ${question}`);
+    }
+
+}
 
 while (true) {
     var song_name = prompt(song_name_prompt);
@@ -34,7 +50,7 @@ while (true) {
         if (input_melody == 'exit' || input_melody == null) {
             break;
         }
-        melody_and_warning = main.convertBlheli32ToRtttlPrefixbuilderInvalidSymbolReturn(insert_number(header, i + 1), input_melody);
+        melody_and_warning = convertBlheli32ToRtttl(input_melody, song_name, speed);
         melodies.push(melody_and_warning[0]);
         console.log(`Invalid symbols: ${melody_and_warning[1].join(', ')}`);
         console.log(`\nESC${i + 1}: ${melodies[i]}\n`);
