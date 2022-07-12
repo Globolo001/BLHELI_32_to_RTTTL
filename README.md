@@ -3,23 +3,25 @@
 
 ## JavaScript Module
 
-# Usage
+### Usage
 
-### Input
-Call the function:
+#### Input
+Call the function:\
  `convert_blheli32_to_rttl_prefixbuilder_return_invalid_symbols(BLHELI_32_string, song_name?,speed?, duration?, octave?)`
  
- `?`: Optional parameter. The default are `song_name = 'test',speed = 210, duration = 8, octave = 5`.
+ `?`: Optional parameter. The default are `song_name = 'test',speed = 210, duration = 8, octave = 5`.\
 Parameter-numbers can be string or int. In case it does not match critera, they will be set to default.
 
-### Output
-The function returns an array (length 2) with the RTTTL string and the unknown-symbols-string-array.
-`[Array<String,Array<String>]`
-Example: `['test:b=300,o=5,d=8:4b5,8p,4b5,8p,2a5', ['B6', 'M', '1/', 'U3']]`
+#### Output
+The function returns an array (length 2) with the RTTTL string and the unknown-symbols-string-array.\
+`[String,Array<String>]]`
 
-The final RTTTL string can be accessed easily. `function_result[0]`
+Example:\
+`['test:b=300,o=5,d=8:4b5,8p,4b5,8p,2a5', ['B6', 'M', '1/', 'U3']]`
 
-### Details
+The final RTTTL string can be accessed easily: `function_result[0]`
+
+#### Details
 It does the filtering for unknown symbols with a regex and should always produce an RTTTL readable output without the unwanted symbols.
 
 It might be useful to display the invalid symbols from `result[1]` for the user to improve the users BLHELI_32 string and (maybe) adjust the regex if a new syntax is found.
@@ -39,7 +41,7 @@ I am happy to receive feedback.
 ### Input:
 I hope I got all syntax of BLHELI_32 music covered (if not, contact me on BlueJay Discord). Just copy-paste your music (without "quotations") into the prompt when asked.
 The formatting is explained in the UI.
-p
+
 ## Useful Links:
 BlueJay Github: https://github.com/mathiasvr/bluejay
 ESC-Flasher for BlueJay and music: https://esc-configurator.com
