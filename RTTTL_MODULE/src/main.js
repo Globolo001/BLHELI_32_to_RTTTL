@@ -4,16 +4,10 @@
 /** 
  * This program takes a BLHELI_32 music string and converts it to RTTTL for BlueJay ESC.
  * 
- * API: Call 'convert_unformatted_string_to_rtttl_with_prefixbuilder_return_invalid_symbols' with the optional parameter and an unformatted BL_HELI_32 string;
+ * API: Call 'convertBlheli32ToRtttl(unformattedSourceMelody, songName = 'test', speed = 210, duration = 8, octave = 5)' with the optional parameter and an unformatted BL_HELI_32 string;
  * It returns the rtttl string and the invalid-symbols-strings-array (eg [32DJ, 1/]) as an array;
  * 
- * For using a custom prefix (not reccommended):
- * Call 'convert_unformatted_string_to_rtttl_return_invalid_symbols' with the unformatted BL_HELI_32 string;
- * 'convert_unformatted_string_to_rtttl' only returns the rtttl string without the invalid-symbols-strings;
- * 
- * Prefix systax: '${name}:d=8,o=5,b=${speed_int}'; (No colon ':').
- * To not use a prefix, call 'convert_unformatted_string_to_rtttl_stock_prefix' with an unformatted BL_HELI_32 string and no prefix;
- */
+*/
 
 // ############################# Just some code #############################
 
