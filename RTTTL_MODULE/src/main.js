@@ -17,10 +17,11 @@
 
 // ############################# Just some code #############################
 
-const noteRegex = /^[CDEFGABP]#?\d{0,4}$/;
-const durationWholeRegex = /^(?:1|2|4|8|16|32|64|128)$/;
-const durationFractionRegex = /^\d\/(?:1|2|4|8|16|32|64|128)$/;
-const noteWithDurationRegex = /^[CDEFGABP]\d\/(?:1|2|4|8|16|32|64|128)$/;
+const noteRegex = /^[CDEFGABP]#?\d{0,4}$/; // Example: C, C#, D3, G#5
+const durationWholeRegex = /^(?:1|2|4|8|16|32|64|128)$/; // Example: 4, 8, 16, 32
+const durationFractionRegex = /^\d\/(?:1|2|4|8|16|32|64|128)$/; // Example: 1/2, 3/16, 7/128
+const noteWithDurationRegex = /^[CDEFGABP]\d\/(?:1|2|4|8|16|32|64|128)$/; // Example: C4/4, A#2/16, G3/8
+
 
 
 const replacesymbolsRegex = /["'`\n]/g;
@@ -58,8 +59,6 @@ function getIntoRightFormat(inputString) {
   console.log(correctStringArray.join(' '))
   return [correctStringArray.join(' '), invalid_notes];
 }
-
-
 
 /**
  * A simple class for a note.

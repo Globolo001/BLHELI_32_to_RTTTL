@@ -1,4 +1,4 @@
-import convertBlheli32ToRtttl from "./main.js";
+import convertBlheli32ToRtttl from "../RTTTL_MODULE/src/main.js";
 
 const formListener = (event) => {
     event.preventDefault();
