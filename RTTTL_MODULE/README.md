@@ -10,7 +10,6 @@ function with the prefix and the unformatted BLHELI_32 string as arguments. The 
 
 ## Example Usage
 ```javascript
-let prefix = 'TestMelody';
 let unformatted_source_Melody = 'C6 2/8 G#2 1/2 C#5 8/8 P2 INVALID1 djs !/';
 let rtttl_string = convertBlheli32ToRtttl(unformatted_source_Melody, 'teest1', 420, 8, 5);
 console.log(rtttl_string);
@@ -19,7 +18,7 @@ This will output the following:
 
 ```javascript
 // Result
-rtttl_string = ["test:b=420,o=5,d=8:8c6,2g#2,8c#5,2p", ["INVALID1", "djs", "!/"]];
+rtttl_string = ["teest1:b=420,o=5,d=8:8c6,2g#2,8c#5,2p", ["INVALID1", "djs", "!/"]];
 
 // To access only the RTTTL string, use the following:
 rtttl_string[0];
