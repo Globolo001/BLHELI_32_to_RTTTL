@@ -19,7 +19,12 @@
 
   // ############################# Just some code #############################
 
-  const acceptedNotationRegex = /^[CDEFGABP]#?\d{0,4}$|^\d[/\/]\d{1,2}$|^\d$/;
+  const noteRegex = /^[CDEFGABP]#?\d{0,4}$/;
+  const durationWholeRegex = /^(?:1|2|4|8|16|32|64|128)$/;
+  const durationFractionRegex = /^\d\/(?:1|2|4|8|16|32|64|128)$/;
+  const noteWithDurationRegex = /^[CDEFGABP]\d\/(?:1|2|4|8|16|32|64|128)$/;
+
+
   const replacesymbolsRegex = /["'`\n]/g;
   const removeRegex = /\s|\t|\n/g;
 
@@ -36,23 +41,26 @@
     for (const element of workingArray) {
       if (removeRegex.test(element) || element == '') {
         continue;
-      } else if (acceptedNotationRegex.test(element)) {
-        if (!isNaN(element)) {
-          // If it is a duration in format 'X' (eg 4): add it to the last note
-          correctStringArray[correctStringArray.length - 1] += element;
-        } else if (element.includes('/')) {
-          // If the duration is in format '1/X' (eg 1/4): add it to the last note
-          correctStringArray[correctStringArray.length - 1] += element.substring(element.indexOf('/') + 1);
-        } else {
-          correctStringArray.push(element);
-        }
+      } else if (noteRegex.test(element)) {
+        // If it is a note: add it to the array
+        correctStringArray.push(element);
+      } else if (durationWholeRegex.test(element)) {
+        // If it is a duration in format number (eg 4): add it to the last note
+        correctStringArray[correctStringArray.length - 1] += element;
+      } else if (durationFractionRegex.test(element)) {
+        // If the duration is in format '1/X' (eg 1/4): add it to the last note
+        correctStringArray[correctStringArray.length - 1] += element.substring(element.indexOf('/') + 1);
+      } else if (noteWithDurationRegex.test(element)) {
+        // Allowed notation with duration
+        correctStringArray.push(element.substring(0,1) + element.substring(3,5));
       } else {
         invalid_notes.push(element);
       }
     }
-
+    console.log(correctStringArray.join(' '));
     return [correctStringArray.join(' '), invalid_notes];
   }
+
 
 
   /**
