@@ -6,7 +6,7 @@
 ### Usage
 
 #### Input
-Call the function:
+Call the function:\
  `convertBlheli32ToRtttl(BLHELI_32_string, song_name?,speed?, duration?, octave?)`
  
  `?`: Optional parameter. The default are `song_name = 'test',speed = 210, duration = 8, octave = 5`.\
@@ -19,12 +19,14 @@ The function returns an array (length 2) with the RTTTL string and the unknown-s
 Example:\
 `['test:b=300,o=5,d=8:4b5,8p,4b5,8p,2a5', ['B6', 'M', '1/', 'U3']]`
 
+Currently there is always the default header which is adjusted with the user parameters.
+
 The final RTTTL string can be accessed easily: `function_result[0]`
 
 #### Details
-It for unknown symbols (in BLHELI_32 notation) with a regex and should always produce an RTTTL readable output without the unwanted symbols.
+It filters for unknown symbols (in BLHELI_32 notation) with a regex and should always produce an RTTTL readable output without the unwanted symbols. If there is no melody, there will (currently only be the (default) header.
 
-It might be useful to display the invalid symbols from `result[1]` for the user to improve the users BLHELI_32 string and (maybe) adjust the regex if a new syntax is found.
+It might be useful to display the invalid symbols from `result[1]` for the user to improve the users BLHELI_32 string and (maybe) adjust the regex if a new syntax is found.    
 It removes all spaces, quotation-marks and new lines.
  
 ## For Python
@@ -43,8 +45,8 @@ I hope I got all syntax of BLHELI_32 music covered (if not, contact me on BlueJa
 The formatting is explained in the UI.
 
 ## Useful Links:
-BlueJay Github: https://github.com/mathiasvr/bluejay\
-ESC-Flasher for BlueJay and music: https://esc-configurator.com\
+BlueJay Github: https://github.com/mathiasvr/bluejay \
+ESC-Flasher for BlueJay and music: https://esc-configurator.com \
 NPM JS: https://www.npmjs.com/package/blheli_32_to_rtttl 
 
 #### Note

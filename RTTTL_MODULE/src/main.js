@@ -1,3 +1,4 @@
+
 // Alpha in JavaScript
 
 /** 
@@ -16,9 +17,9 @@
 
 // ############################# Just some code #############################
 
-const acceptedNotationRegex = new RegExp('^[CDEFGABP]#?[0-9]{0,4}$|^[0-9][/\\/][0-9]{1,2}$|^[0-9]$');
-const replacesymbolsRegex = new RegExp("\"|\'\`|\n", 'g');
-const removeRegex = new RegExp("\s|\t|\n", 'g');
+const acceptedNotationRegex = /^[CDEFGABP]#?\d{0,4}$|^\d[/\/]\d{1,2}$|^\d$/;
+const replacesymbolsRegex = /["'`\n]/g;
+const removeRegex = /\s|\t|\n/g;
 
 /**
  * Converts most BLHELI_32 notation to the correct format used by the script. Also removes spaces and tabs.
@@ -26,41 +27,31 @@ const removeRegex = new RegExp("\s|\t|\n", 'g');
  * @returns {String} Formatted BLHELI_32 notation
  */
 function getIntoRightFormat(inputString) {
-    inputString = inputString.replaceAll(replacesymbolsRegex, '');
-    let workingArray = inputString.split(' ');
+  const workingArray = inputString.replaceAll(replacesymbolsRegex, '').split(' ');
+  const invalid_notes = [];
+  const correctStringArray = [];
 
-    let invalid_notes = [];
+  for (const element of workingArray) {
+    if (removeRegex.test(element) || element == '') {
+      continue;
+    } else if (acceptedNotationRegex.test(element)) {
+      if (!isNaN(element)) {
+        // If it is a duration in format 'X' (eg 4): add it to the last note
+        correctStringArray[correctStringArray.length - 1] += element;
+      } else if (element.includes('/')) {
+        // If the duration is in format '1/X' (eg 1/4): add it to the last note
+        correctStringArray[correctStringArray.length - 1] += element.substring(element.indexOf('/') + 1);
+      } else {
+        correctStringArray.push(element);
+      }
+    } else {
+      invalid_notes.push(element);
+    }
+  }
 
-    // Filter for only valid symbols
-    let betterArray = workingArray.filter(function (element) {
-        if (removeRegex.test(element) || element == '') {
-            return false;
-        } else if (acceptedNotationRegex.test(element)) {
-            return true;
-        } else {
-            invalid_notes.push(element);
-            return false;
-        }
-    });
-
-    // Bring into correct notation: eg 'E#5 1/4' -> 'E#54'
-    let correctStringArray = [];
-    correctStringArray.push(betterArray[0]); //Always add the first element
-    betterArray.shift(); //Remove the first element
-
-    betterArray.forEach(function (element) {
-        if (!isNaN(element)) {
-            // If it is a duration in format 'X' (eg 4): add it to the last note
-            correctStringArray[correctStringArray.length - 1] += element;
-        } else if (element.includes('/')) {
-            // If the duration is in format '1/X' (eg 1/4): add it to the last note
-            correctStringArray[correctStringArray.length - 1] += element.substring(element.indexOf('/') + 1);
-        } else {
-            correctStringArray.push(element);
-        }
-    });
-    return [correctStringArray.join(' '), invalid_notes];
+  return [correctStringArray.join(' '), invalid_notes];
 }
+
 
 /**
  * A simple class for a note.
@@ -102,24 +93,18 @@ function splitIntoNoteObject(noteString) {
     } else {
         return;
     }
-
 }
+
 /**
  * Go through each note in the String and return as list of notes as Note objects.
  * @param {String} source_Melody A formatted BLHELI_32 string
  * @returns {Array<Note>} Array of Note objects;
  */
 function splitAllNotes(source_Melody) {
-    let note_string = source_Melody.split(' ');
-    let notes = [];
-    note_string.forEach(function (note) {
-        note = splitIntoNoteObject(note)
-        if (note != undefined) {
-            notes.push(note);
-        }
-    });
-    return notes;
+    const note_string = source_Melody.split(' ');
+    return note_string.map(note => splitIntoNoteObject(note)).filter(note => note !== undefined);
 }
+
 
 /**
  * Converts an Arrray of Note objects to an rtttl string.
@@ -127,11 +112,9 @@ function splitAllNotes(source_Melody) {
  * @returns {String} Rtttl String;
  */
 function joinNotesToRtttl(notes) {
-    let result_list = notes.map(function (note) {
-        return note.get_rtttl_string();
-    });
-    return result_list.join(',');
+    return notes.map(note => note.get_rtttl_string()).join(',');
 }
+
 
 /**
  * Converts an unformatted BLHELI_32 string to rtttl string; Returns the rtttl string and the invalid symbols.
@@ -158,38 +141,16 @@ function convertBlheli32StringTotRtttlReturnInvalidSymbols(prefix, unformatted_s
  * @param {String} octave Octave for the song. Leave empty for default "5".
  * @returns {[String,Array<String>]}  as array (final rtttl string, an array of invalid symbol-strings)
  */
-function convertBlheli32ToRtttl(unformattedSourceMelody, songName = 'test',speed = 210, duration = 8, octave = 5)  {
-    songName = songName.length > 0 ? songName : 'test';
+export default function convertBlheli32ToRtttl(unformattedSourceMelody, songName = 'test', speed = 210, duration = 8, octave = 5) {
+    // Set default values for song name, speed, duration, and octave
+    songName = songName || 'test';
     speed = isNaN(speed) ? 210 : speed;
-    if (isNaN(duration)) {
-        duration = 8;
-    }else {
-        let n = parseInt(duration);
-        duration = (n && (n & (n - 1)) === 0) ? duration : 8;
-    }
+    duration = (Math.log2(duration) % 1 === 0) ? duration : 8; // Check if duration is a power of 2
     octave = isNaN(octave) ? 5 : octave;
-
+  
+    // Create prefix for RTTTL format
     let prefix = `${songName}:b=${speed},o=${octave},d=${duration}`;
+    console.log(prefix);
+    // Convert BLHELI_32 string to RTTTL format
     return convertBlheli32StringTotRtttlReturnInvalidSymbols(prefix, unformattedSourceMelody);
-}
-// ############################# Node.js #############################
-
-export default convertBlheli32ToRtttl;
-
-// ############################# Testing Ground #############################
-var testingActive = false;
-if(testingActive) {
-    const song1 = "B5 4 P8 B5 4 P8 A5 2 P4 D5 8 E5 8 G5 8 D5 8 A5 4 P8 A5 4 P8 G5 4 G5 8 F#5 8 E5 4 D5 8 E5 8 G5 8 E5 8 G5 2 A5 4 F#5 4 F#5 8 E5 8 D5 4 D5 8 P 8 D5 8 P8 A5 4 A5 8 P8 G5 2"
-    const song2 = "C64 A#54 A54 F54 G52 G54 D64 C62 A#52 A52 A54 A54 C62 A#54 A54 G52 G54 A#64 A64 A#64 A64 A#64 G52 G54 A#64 A64 A#64 A64 A#64"
-    const song3 = "E6 1/4  D6 1/4  F#5 1/2  G#5 1/2    C#6 1/4    B5 1/4    D5 1/2     E5 1/2  B5 1/4  A5 1/4  C#5 1/2 E5 1/2 A5 1/1 "
-    const song4 = "E64 D64 F#52 G#52 C#64 B54 D52 E52 B54 A54 C#52 E52 A51"
-    const song5_broken = "D5 8 E5 8 G3 2 F#5 1/ J#6 1/4 B5 14 " // partially passing notes
-    const song6_broken = "1/ /4 H not a## note" //no passing notes
-
-    console.log(convertBlheli32ToRtttl(song1, 'teest1', 280, 6, 2)[0]);
-    console.log(convertBlheli32ToRtttl(song2, 'teeest2', 260)[0]);
-    console.log(convertBlheli32ToRtttl(song3)[0]);
-    console.log(convertBlheli32ToRtttl(song4, 'teeeeeeest4', 420,'A')[0]);
-    console.log(convertBlheli32ToRtttl(song5_broken, 'teeeeest5', 210,8,'C')[0]);
-    console.log(convertBlheli32ToRtttl(song6_broken, 'teeeeest6'));
-}
+  }

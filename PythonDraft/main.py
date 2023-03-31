@@ -75,26 +75,26 @@ def split_all_notes(source_Melody):
         notes.append(split_into_note_and_duration(note))
     return notes
 
-#compile the notes into rttl
-def convert_split_to_rttl(notes):
-    rttl_notes = ""
+#compile the notes into rtttl
+def convert_split_to_rtttl(notes):
+    rtttl_notes = ""
     for note, duration in notes:
-        #convert the note to rttl
-        rttl_notes+=duration
-        rttl_notes+=note
-        rttl_notes+=(",")
-    rttl_notes = rttl_notes[:-1]
-    return rttl_notes
+        #convert the note to rtttl
+        rtttl_notes+=duration
+        rtttl_notes+=note
+        rtttl_notes+=(",")
+    rtttl_notes = rtttl_notes[:-1]
+    return rtttl_notes
 
-#do the conversion from a formatted string to rttl
-def convert_formatted_string_to_rttl(prefix,source_Melody):
+#do the conversion from a formatted string to rtttl
+def convert_formatted_string_to_rtttl(prefix,source_Melody):
     notes = split_all_notes(source_Melody)
-    result = prefix + ":" + convert_split_to_rttl(notes)
+    result = prefix + ":" + convert_split_to_rtttl(notes)
     return result
 
-#do the full conversion from unformatted string to rttl
-def convert_unformatted_string_to_rttl(prefix,source_Melody):
-    return convert_formatted_string_to_rttl(prefix, get_into_right_format(source_Melody))
+#do the full conversion from unformatted string to rtttl
+def convert_unformatted_string_to_rtttl(prefix,source_Melody):
+    return convert_formatted_string_to_rtttl(prefix, get_into_right_format(source_Melody))
 
 #insert number before colon in string for the prefix in rtttl
 def insert_number(string, number):
@@ -108,10 +108,10 @@ def insert_number(string, number):
 # song3 = "E6 1/4  D6 1/4  F#5 1/2  G#5 1/2    C#6 1/4    B5 1/4    D5 1/2     E5 1/2  B5 1/4  A5 1/4  C#5 1/2 E5 1/2 A5 1/1"
 # song4_broken = "D5 8 E5 8 G3 2 F#5 1/ J#6 1/4 B5 14"
 
-# print (convert_unformatted_string_to_rttl("testing1", song1))
-# print (convert_unformatted_string_to_rttl("testing2", song2))
-# print (convert_unformatted_string_to_rttl("testing3", song3))
-# print (convert_unformatted_string_to_rttl("testing4", song4_broken))
+# print (convert_unformatted_string_to_rtttl("testing1", song1))
+# print (convert_unformatted_string_to_rtttl("testing2", song2))
+# print (convert_unformatted_string_to_rtttl("testing3", song3))
+# print (convert_unformatted_string_to_rtttl("testing4", song4_broken))
 
 
 ################################# COMMANDLINE UI ##############################################
@@ -140,7 +140,7 @@ while True:
         input_melody = input(input_prompt.format(i+1))
         if input_melody == "exit":
             break
-        melodies.append(convert_unformatted_string_to_rttl(insert_number(header,i+1),input_melody))
+        melodies.append(convert_unformatted_string_to_rtttl(insert_number(header,i+1),input_melody))
         print("\nESC{}:\n{}\n".format(i+1, melodies[i]))
     
     print("\n\n##### ALL MELODIES #####\n")
