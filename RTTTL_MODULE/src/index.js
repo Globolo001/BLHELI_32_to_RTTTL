@@ -33,28 +33,23 @@ const formListener = (event) => {
         <div class="form-row">
           <label for="unformattedSourceMelody${id}">BLHELI_32</label>
           <textarea id="unformattedSourceMelody${id}" name="unformattedSourceMelody"></textarea>
-          <button type="button" onclick="copyToClipboard('unformattedSourceMelody${id}')">📋</button>
         </div>
         <div class="form-group">
           <div class="form-row">
             <label for="songName${id}">Name:</label>
             <input type="text" id="songName${id}" name="songName" value="test">
-            <button type="button" onclick="copyToClipboard('songName${id}')">📋</button>
           </div>
           <div class="form-row">
             <label for="speed${id}">Speed:</label>
             <input type="text" id="speed${id}" name="speed" value="420" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
-            <button type="button" onclick="copyToClipboard('speed${id}')">📋</button>
           </div>
           <div class="form-row">
             <label for="duration${id}">Duration:</label>
             <input type="text" id="duration${id}" name="duration" value="8" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
-            <button type="button" onclick="copyToClipboard('duration${id}')">📋</button>
           </div>
           <div class="form-row">
             <label for="octave${id}">Octave:</label>
             <input type="text" id="octave${id}" name="octave" value="5">
-            <button type="button" onclick="copyToClipboard('octave${id}')">📋</button>
           </div>
         </div>
         <input type="submit" value="Convert">
@@ -62,13 +57,12 @@ const formListener = (event) => {
       <div id="result${id}">
         <div class="form-row">
           <label for="formattedMelody${id}">RTTL🎼</label>
-          <textarea id="formattedMelody${id}" name="formattedMelody" readonly></textarea>
+          <textarea id="formattedMelody${id}" name="formattedMelody"></textarea>
           <button type="button" onclick="copyToClipboard('formattedMelody${id}')">📋</button>
         </div>
         <div class="form-row">
           <label for="invalidSymbols${id}">🗑</label>
-          <input type="text" id="invalidSymbols${id}" name="invalidSymbols" readonly>
-          <button type="button" onclick="copyToClipboard('invalidSymbols${id}')">📋</button>
+          <textarea id="invalidSymbols${id}" name="invalidSymbols"></textarea>
         </div>
       </div>
     `;
@@ -78,12 +72,20 @@ const formListener = (event) => {
   };
   
   
-  const copyToClipboard = (elementId) => {
-    const element = document.getElementById(elementId);
-    element.select();
-    document.execCommand("copy");
-  };
+const copyToClipboard = async (text) => {
+  try {
+    await navigator.clipboard.writeText(text);
+    console.log('Text copied to clipboard');
+  } catch (err) {
+    console.error('Failed to copy text: ', err);
+  }
+};
+
+
+  
 
 for (let i = 1; i <= 4; i++) {
   createDiv(i);
 }
+
+copyToClipboard('fckaf.de/eis')

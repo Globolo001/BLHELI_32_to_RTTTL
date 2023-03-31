@@ -28,25 +28,23 @@ body {
 }
 
 .grid-item form .form-group {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 10px;
-  }
-  
-  .grid-item form .form-row {
-    display: flex;
-    align-items: center;
-  }
-  
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+}
+
+.grid-item form .form-row {
+  display: flex;
+  align-items: center;
+}
 
 textarea {
-    display: inline-block;
-    margin-left: 10px;
-    resize: vertical;
-    width: 100%;
-    height: auto;
-  }
-  
+  display: inline-block;
+  margin-left: 10px;
+  resize: vertical;
+  width: 100%;
+  height: auto;
+}
 
 h1 {
   font-size: 28px;
@@ -59,7 +57,6 @@ h1 {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
 }
 
 .form-row label {
@@ -81,7 +78,7 @@ h1 {
 }
 
 input[type="submit"] {
-  margin: 0px auto 0;
+  margin: 10px auto  10px ;
   display: block;
   background-color: #ddd;
   color: #333;
@@ -101,4 +98,16 @@ input[type="submit"]:hover {
 .result {
   margin-top: 20px;
   font-size: 16px;
+}
+
+/* Hide grid layout on small screens */
+@media only screen and (max-width: 690px) {
+  #container {
+    display: block;
+    height: auto;
+  }
+  
+  .grid-item {
+    margin-bottom: 20px;
+  }
 }

@@ -1,4 +1,4 @@
-import convertBlheli32ToRtttl from "../src/index.js";
+import convertBlheli32ToRtttl from "../RTTTL_MODULE/src/main.js";
 import readline from "readline";
 
 // ############################# COMMANDLINE UI #############################
