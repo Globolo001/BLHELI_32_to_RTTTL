@@ -24,6 +24,13 @@ rtttl_string = ["teest1:b=420,o=5,d=8:8c6,2g#2,8c#5,2p", ["INVALID1", "djs", "!/
 rtttl_string[0];
 ```
 
+## Limitations
+Even though the script always produces a working output it does not handle every possible case. The following are some limitations of the script:
+
+1) It does not handle cases where the fraction is not 1/x (eg 2/3 8/8). They will be interpreted as 1/X (eg 2/3 will be interpreted as 1/3, and 8/8 will be interpreted as 1/8).
+3) Incorrect syntax may not be always handled correctly. For example  `C#4 4 4`will be interpreted as `44C#4`instead of invalidating the second 4.
+2) There may be some valid BLHELI_32 syntax that is not handled by the script. If you find any, please let me know.
+
 ## Code Explanation
 
 ### Regular Expressions
